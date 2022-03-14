@@ -2,9 +2,20 @@ cmake_minimum_required(VERSION 2.8.3)
 
 project(uavcar)
 
-find_package(catkin REQUIRED)
+# Depend on system install of Gazebo
+find_package(gazebo REQUIRED)
+find_package(roslaunch)
 
-catkin_package()
+find_package(catkin REQUIRED COMPONENTS
+	gazebo_ros
+	roscpp
+)
+
+catkin_package(
+	CATKIN_DEPENDS
+    INCLUDE_DIRS
+    LIBRARIES
+)
 
 find_package(roslaunch)
 
