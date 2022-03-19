@@ -9,10 +9,16 @@ find_package(roslaunch)
 find_package(catkin REQUIRED COMPONENTS
 	gazebo_ros
 	roscpp
+	geometry_msgs 
+	sensor_msgs
+	nav_msgs
+	std_srvs
 )
 
+link_directories(${GAZEBO_LIBRARY_DIRS})
+
 catkin_package(
-	CATKIN_DEPENDS
+	CATKIN_DEPENDS roscpp geometry_msgs sensor_msgs nav_msgs std_srvs
     INCLUDE_DIRS
     LIBRARIES
 )

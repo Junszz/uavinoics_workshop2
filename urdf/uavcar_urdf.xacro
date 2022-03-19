@@ -295,7 +295,7 @@
     <visual>
       <origin
         xyz="0 0 0"
-        rpy="0 0 0" />
+        rpy="0 0 -1.57" />
       <geometry>
         <mesh
           filename="package://uavcar/meshes/ultrasonic_link.STL" />
@@ -321,7 +321,7 @@
     type="fixed">
     <origin
       xyz="0 0.051648 0.01217"
-      rpy="3.1416 0 3.1416" />
+      rpy="3.1416 0 1.57" />
     <parent
       link="base_link" />
     <child
