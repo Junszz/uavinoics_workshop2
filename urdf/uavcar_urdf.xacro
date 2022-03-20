@@ -28,17 +28,17 @@
     name="base_link">
     <inertial>
       <origin
-        xyz="0.00146931155818059 0.0202547315015083 0.00383279508656678"
+        xyz="0.00147899999820755 0.0188763352547597 0.0134745939671567"
         rpy="0 0 0" />
       <mass
-        value="0.219401679394642" />
+        value="0.177282637029181" />
       <inertia
-        ixx="0.000208124167049704"
-        ixy="5.60378040345074E-09"
-        ixz="3.36864713263349E-08"
-        iyy="0.000263070736031005"
-        iyz="-2.91877091751583E-07"
-        izz="9.82049287222583E-05" />
+        ixx="0.000202760531211198"
+        ixy="5.60378040344759E-09"
+        ixz="3.36864713263478E-08"
+        iyy="0.000261966966777859"
+        iyz="-2.91877091751572E-07"
+        izz="9.32834509325526E-05" />
     </inertial>
     <visual>
       <origin
@@ -49,7 +49,7 @@
           filename="package://uavcar/meshes/base_link.STL" />
       </geometry>
       <material
-        name="black">
+        name="">
         <color
           rgba="0.984313725490196 0.980392156862745 0.96078431372549 1" />
       </material>
@@ -64,21 +64,22 @@
       </geometry>
     </collision>
   </link>
+<!-- Ball caster -->
   <link
-    name="fl_wheel_link">
+    name="caster_link">
     <inertial>
       <origin
-        xyz="0.00933674073330586 0.00927693681691626 -0.0137980057502913"
+        xyz="4.33680868994202E-19 0 0"
         rpy="0 0 0" />
       <mass
-        value="0.026419137801914" />
+        value="0.0114940403219339" />
       <inertia
-        ixx="2.21976511661251E-05"
-        ixy="4.47703357237612E-16"
-        ixz="2.16374537517752E-15"
-        iyy="1.18489017629898E-05"
-        iyz="-1.92054790503463E-14"
-        izz="1.18487420682976E-05" />
+        ixx="9.01132761239615E-07"
+        ixy="-4.63221143029696E-23"
+        ixz="9.26442286059391E-24"
+        iyy="9.01132761239615E-07"
+        iyz="1.96868985787621E-23"
+        izz="9.01132761239615E-07" />
     </inertial>
     <visual>
       <origin
@@ -86,10 +87,10 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://uavcar/meshes/fl_wheel_link.STL" />
+          filename="package://uavcar/meshes/caster_link.STL" />
       </geometry>
       <material
-        name="red">
+        name="">
         <color
           rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
       </material>
@@ -100,91 +101,40 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://uavcar/meshes/fl_wheel_link.STL" />
+          filename="package://uavcar/meshes/caster_link.STL" />
       </geometry>
     </collision>
   </link>
   <joint
-    name="fl_wheel_joint"
+    name="caster_joint"
     type="continuous">
     <origin
-      xyz="-0.052447 0.050609 -0.0045225"
-      rpy="1.5708 0 3.1416" />
+      xyz="0.0028624 0.039118 -0.015737"
+      rpy="1.5708 0 0" />
     <parent
       link="base_link" />
     <child
-      link="fl_wheel_link" />
+      link="caster_link" />
     <axis
       xyz="0 0 0" />
   </joint>
+
+  <!-- Left wheel -->
   <link
-    name="fr_wheel_link">
+    name="left_wheel_link">
     <inertial>
       <origin
-        xyz="0.00933674073330584 0.0092769368169169 -0.0137980057502909"
+        xyz="-0.00933674073330593 0.0137980057502908 -0.00927693681691629"
         rpy="0 0 0" />
       <mass
         value="0.026419137801914" />
       <inertia
         ixx="2.21976511661251E-05"
-        ixy="4.47811464446858E-16"
-        ixz="2.16381823941542E-15"
-        iyy="1.18489017629898E-05"
-        iyz="-1.92054815228219E-14"
-        izz="1.18487420682976E-05" />
-    </inertial>
-    <visual>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://uavcar/meshes/fr_wheel_link.STL" />
-      </geometry>
-      <material
-        name="red">
-        <color
-          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
-      </material>
-    </visual>
-    <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://uavcar/meshes/fr_wheel_link.STL" />
-      </geometry>
-    </collision>
-  </link>
-  <joint
-    name="fr_wheel_joint"
-    type="continuous">
-    <origin
-      xyz="0.055629 0.027769 0.018468"
-      rpy="0 0 0" />
-    <parent
-      link="base_link" />
-    <child
-      link="fr_wheel_link" />
-    <axis
-      xyz="0 0 0" />
-  </joint>
-  <link
-    name="bl_wheel_link">
-    <inertial>
-      <origin
-        xyz="0.00933674073330595 0.00927693681691626 -0.0137980057502909"
-        rpy="0 0 0" />
-      <mass
-        value="0.026419137801914" />
-      <inertia
-        ixx="2.21976511661251E-05"
-        ixy="4.47703179377387E-16"
-        ixz="2.16381625694231E-15"
-        iyy="1.18489017629898E-05"
-        iyz="-1.92054821918823E-14"
-        izz="1.18487420682976E-05" />
+        ixy="2.16381805218921E-15"
+        ixz="4.47703179372755E-16"
+        iyy="1.18487420682976E-05"
+        iyz="-1.92054842461658E-14"
+        izz="1.18489017629898E-05" />
     </inertial>
     <visual>
       <origin
@@ -195,7 +145,7 @@
           filename="package://uavcar/meshes/bl_wheel_link.STL" />
       </geometry>
       <material
-        name="red">
+        name="">
         <color
           rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
       </material>
@@ -211,33 +161,34 @@
     </collision>
   </link>
   <joint
-    name="bl_wheel_joint"
+    name="left_wheel_joint"
     type="continuous">
     <origin
       xyz="-0.052447 -0.052231 -0.0091276"
-      rpy="-3.1416 0 -3.1416" />
+      rpy="1.5708 0 0" />
     <parent
       link="base_link" />
     <child
-      link="bl_wheel_link" />
+      link="left_wheel_link" />
     <axis
       xyz="0 0 0" />
   </joint>
+  <!-- Right wheel -->
   <link
-    name="br_wheel_link">
+    name="right_wheel_link">
     <inertial>
       <origin
-        xyz="0.00933674073330602 0.00927693681691562 -0.0137980057502909"
+        xyz="0.00933674073330604 0.0137980057502908 0.0092769368169147"
         rpy="0 0 0" />
       <mass
         value="0.026419137801914" />
       <inertia
         ixx="2.21976511661251E-05"
-        ixy="4.47596247242471E-16"
-        ixz="2.16381736016141E-15"
-        iyy="1.18489017629899E-05"
-        iyz="-1.92054832982213E-14"
-        izz="1.18487420682976E-05" />
+        ixy="-2.16381780280678E-15"
+        ixz="4.475950864416E-16"
+        iyy="1.18487420682976E-05"
+        iyz="1.92054774246959E-14"
+        izz="1.18489017629898E-05" />
     </inertial>
     <visual>
       <origin
@@ -248,7 +199,7 @@
           filename="package://uavcar/meshes/br_wheel_link.STL" />
       </geometry>
       <material
-        name="red">
+        name="">
         <color
           rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
       </material>
@@ -264,44 +215,45 @@
     </collision>
   </link>
   <joint
-    name="br_wheel_joint"
+    name="right_wheel_joint"
     type="continuous">
     <origin
       xyz="0.055629 -0.033677 -0.0091276"
-      rpy="-3.1416 0 0" />
+      rpy="1.5708 0 0" />
     <parent
       link="base_link" />
     <child
-      link="br_wheel_link" />
+      link="right_wheel_link" />
     <axis
       xyz="0 0 0" />
   </joint>
-  <link
+  <!-- Ultrasonic sensor -->
+   <link
     name="ultrasonic_link">
     <inertial>
       <origin
-        xyz="-0.00199122837139814 0.00279169071619218 -3.46944695195361E-18"
+        xyz="-0.00199122837107653 0.00279169071619218 -3.46944695195361E-18"
         rpy="0 0 0" />
       <mass
         value="0.00191039816339745" />
       <inertia
         ixx="3.47286799039144E-08"
-        ixy="1.65247761678118E-21"
-        ixz="7.08999414871017E-24"
+        ixy="1.64823002157458E-21"
+        ixz="6.46407968803954E-24"
         iyy="1.53770737048943E-07"
-        iyz="5.93681768119573E-24"
+        iyz="5.68335243188381E-24"
         izz="1.36494439910389E-07" />
     </inertial>
     <visual>
       <origin
         xyz="0 0 0"
-        rpy="0 0 -1.57" />
+        rpy="0 0 0" />
       <geometry>
         <mesh
           filename="package://uavcar/meshes/ultrasonic_link.STL" />
       </geometry>
       <material
-        name="yellow">
+        name="">
         <color
           rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
       </material>
@@ -327,27 +279,28 @@
     <child
       link="ultrasonic_link" />
     <axis
-      xyz="1 0 0" />
+      xyz="0 0 0" />
     <limit
       lower="0"
       upper="0"
       effort="0"
       velocity="0" />
   </joint>
+  <!-- Camera -->
   <link
     name="camera_link">
     <inertial>
       <origin
-        xyz="3.22441726097189E-16 0.00113811950909846 1.52655665885959E-16"
+        xyz="1.47256989588285E-13 0.00113811950909846 7.30665528081431E-14"
         rpy="0 0 0" />
       <mass
         value="0.000291398223686155" />
       <inertia
         ixx="3.07398078263368E-09"
-        ixy="1.8881694501457E-23"
-        ixz="-5.46121795190631E-25"
+        ixy="1.88715983890242E-23"
+        ixz="-3.27659631412719E-25"
         iyy="5.78718578948925E-09"
-        iyz="-3.56408474223639E-27"
+        iyz="-7.69801121642549E-26"
         izz="3.07398078263368E-09" />
     </inertial>
     <visual>
@@ -359,7 +312,7 @@
           filename="package://uavcar/meshes/camera_link.STL" />
       </geometry>
       <material
-        name="green">
+        name="">
         <color
           rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
       </material>
@@ -378,13 +331,14 @@
     name="camera_joint"
     type="fixed">
     <origin
-      xyz="0.00155886395139227 0.0450456398524161 0.031152378379546"
-      rpy="-3.14159265358979 0 3.14159265358979" />
+      xyz="0.0015589 0.045046 0.031152"
+      rpy="0 0 1.57" />
     <parent
       link="base_link" />
     <child
       link="camera_link" />
     <axis
-      xyz="1 0 0" />
+      xyz="0 0 0" />
   </joint>
+
 </robot>

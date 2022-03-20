@@ -5,16 +5,13 @@
 <gazebo reference="base_link">
     <material>Gazebo/White</material>
 </gazebo>
-<gazebo reference="fl_wheel_link">
+<gazebo reference="caster_link">
     <material>Gazebo/Red</material>
 </gazebo>
-<gazebo reference="bl_wheel_link">
+<gazebo reference="left_wheel_link">
     <material>Gazebo/Red</material>
 </gazebo>
-<gazebo reference="fr_wheel_link">
-    <material>Gazebo/Red</material>
-</gazebo>
-<gazebo reference="br_wheel_link">
+<gazebo reference="right_wheel_link">
     <material>Gazebo/Red</material>
 </gazebo>
 <gazebo reference="camera_link">
