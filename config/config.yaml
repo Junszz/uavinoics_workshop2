@@ -1,0 +1,15 @@
+uavcar:
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 20
+
+  # Velocity Controllers ---------------------------------------
+  jointL_velocity_controller:
+    type: velocity_controllers/JointVelocityController
+    joint: left_wheel_joint
+    pid: {p: 1.0, i: 0.01, d: 0.0}
+  jointR_velocity_controller:
+    type: velocity_controllers/JointVelocityController
+    joint: right_wheel_joint
+    pid: {p: 1.0, i: 0.01, d: 0.0}
+
