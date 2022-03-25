@@ -48,14 +48,27 @@ This should load the robot car.
 If any error appears, please check if the package has been built successfully and is in the right directory!
 
 
-5. Make all the python scripts executable by:
+
+5. To fix the error when loading joint_velocity controller(ex: cannot load jointL_velocity_controller & jointR_velocity_controller), try to install the following ros pacakges.
+
+**NOTE: replace "noetic" with your ros distro if you are using another ros version.**
+
+```
+sudo apt-get install ros-noetic-gazebo-ros-pkgs ros-noetic-gazebo-ros-control
+sudo apt-get install ros-noetic-velocity-controllers
+```
+
+Then open a new terminal and try again.
+
+6. Make all the python scripts executable by:
 
 ```
 cd ~/catkin_ws/src/uavionics_workshop2/scripts/
 chmod +x keyboard_teleop.py
+chmod +x control.py
 
 ```
 
-6. You can control the robot car by either using tele-operation (running the keyboard_teleop.py script) or complete the autonomous driving script.
+7. You can control the robot car by either using tele-operation (running the keyboard_teleop.py script) or complete the autonomous driving script.
 
 ![Image](images/teleop.png)
