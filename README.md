@@ -26,13 +26,17 @@ git clone https://github.com/Junszz/uavinoics_workshop2
 catkin build
 ```
 
-3. Add this workspace to your linux environment by sourcing the setup file to .bashrc. You can do this by running the following command:
+3. You may add the workspace to your linux environment by sourcing the setup file to .bashrc so that you don't have to source the setup.bash file everytime you open a new terminal. You can do this by running the following command:
 ```
 echo "source ~/(YOUR WORK SPACE)/devel/setup.bash" >> ~/.bashrc
 ```
 As an example:
 ```
 echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
+```
+**Otherwise**, do the following whenever you open a new terminal, replace <> with your workspace name
+```
+source ~/<your_workspace_name>/src/devel/setup.bash
 ```
 
 4. Launch the package.
@@ -48,14 +52,33 @@ This should load the robot car.
 If any error appears, please check if the package has been built successfully and is in the right directory!
 
 
-5. Make all the python scripts executable by:
+
+5. To fix the error when loading joint_velocity controller(ex: cannot load jointL_velocity_controller & jointR_velocity_controller), try to install the following ros pacakges.
+
+**NOTE: replace "noetic" with your ros distro if you are using another ros version.**
+
+```
+sudo apt-get install ros-noetic-gazebo-ros-pkgs ros-noetic-gazebo-ros-control
+sudo apt-get install ros-noetic-velocity-controllers
+```
+
+Then open a new terminal and try again.
+
+6. Make all the python scripts executable by:
 
 ```
 cd ~/catkin_ws/src/uavionics_workshop2/scripts/
 chmod +x keyboard_teleop.py
+chmod +x control.py
+
+```
+**or**, do it with one line
+```
+cd ~/catkin_ws/src/uavionics_workshop2/scripts/
+chmod +x *
 
 ```
 
-6. You can control the robot car by either using tele-operation (running the keyboard_teleop.py script) or complete the autonomous driving script.
+7. You can control the robot car by either using tele-operation (running the keyboard_teleop.py script) or complete the autonomous driving script.
 
 ![Image](images/teleop.png)

@@ -21,37 +21,6 @@
     <material>Gazebo/Green</material>
 </gazebo>
 
-  <!-- <gazebo>
-    <plugin name="imu_plugin" filename="libgazebo_ros_imu.so">
-      <alwaysOn>true</alwaysOn>
-      <bodyName>imu</bodyName>
-      <topicName>uavcar_imu</topicName>
-      <serviceName>imu_service</serviceName>
-      <gaussianNoise>0.0</gaussianNoise>
-      <updateRate>20.0</updateRate>
-    </plugin>
-  </gazebo>
-
-  <gazebo reference="base_link">
-    <gravity>true</gravity>
-    <sensor name="imu_sensor" type="imu">
-      <always_on>true</always_on>
-      <update_rate>100</update_rate>
-      <visualize>true</visualize>
-      <topic>__default_topic__</topic>
-      <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
-        <topicName>imu</topicName>
-        <bodyName>base_link</bodyName>
-        <updateRateHZ>10.0</updateRateHZ>
-        <gaussianNoise>0.0</gaussianNoise>
-        <xyzOffset>0 0 0</xyzOffset>
-        <rpyOffset>0 0 0</rpyOffset>
-        <frameName>imu_link</frameName>
-        <initialOrientationAsReference>false</initialOrientationAsReference>
-      </plugin>
-      <pose>0 0 0 0 0 0</pose>
-    </sensor>
-  </gazebo> -->
 
 	<!-- camera plugin -->
 	<gazebo reference="camera_link">
@@ -132,24 +101,11 @@
         </sensor>
     </gazebo>
 
-	<!-- <gazebo reference="BR_joint_$(arg drone_index)">
-		<provideFeedback>true</provideFeedback>
-    </gazebo>
-	<gazebo reference="BL_joint_$(arg drone_index)">
-		<provideFeedback>true</provideFeedback>
-    </gazebo>
-	<gazebo reference="FR_joint_$(arg drone_index)">
-		<provideFeedback>true</provideFeedback>
-    </gazebo>
-	<gazebo reference="FL_joint_$(arg drone_index)">
-		<provideFeedback>true</provideFeedback>
-    </gazebo>
-	 -->
   <!-- ros_control plugin --> 
-  <gazebo> 
-    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so"> 
-      <robotNamespace>uavcar</robotNamespace> 
-    </plugin> 
-  </gazebo> 
+    <gazebo> 
+      <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so"> 
+        <robotNamespace>uavcar</robotNamespace> 
+      </plugin> 
+    </gazebo> 
 
 </robot>
