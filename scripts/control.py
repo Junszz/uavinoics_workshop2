@@ -24,7 +24,8 @@ def cmd_vel_callback(data):
 def cmd_orientation_callback(data):
     #callback function to get the reference orientation from another rosnode
     global reference_orientation
-    reference_orientation = data.data
+    #bind orientation to [-pi,pi]
+    reference_orientation = 2*math.atan(math.tan(0.5*data.data))
 
 
 def gazebomodelstate_callback(data):
@@ -54,9 +55,14 @@ def gazebomodelstate_callback(data):
     # get error that need to be tuned  --> error between reference orientation & current_orientation...
     error = reference_orientation - current_orientation
 
-    # we need to minimize the difference (error) as we have many ways to achieve the specific yaw angle, ex: from 0->90 is the same as 0->-270, but the first one is the better solution
-    error = min(error+2*math.pi,error,error-2*math.pi)
+    #error term correction 
+    if (abs(error) > math.pi):
+        if error<0:
+            error = error + 2*math.pi
+        else:
+            error = error - 2*math.pi
 
+    print(error)
     #get the desire angular_velocity to apply to our robot from controller
     angular_velocity = p_controller(error)
 
@@ -65,7 +71,7 @@ def gazebomodelstate_callback(data):
 
     # To publish into L & R motor
     left_wheel_pub.publish(left_wheel_speed)
-    right_wheel_pub.publish(right_wheel_speed)
+    right_wheel_pub.publish(-1*right_wheel_speed)
 
 
 def p_controller(error):
@@ -90,7 +96,7 @@ if __name__ == '__main__':
     rospy.Subscriber("/gazebo/model_states", ModelStates,gazebomodelstate_callback)
 
     # publish to two nodes ( left_wheel_speed, right_wheel_speed )
-    left_wheel_pub = rospy.Publisher('/left_wheel_speed', Float64, queue_size=2)
-    right_wheel_pub = rospy.Publisher('/right_wheel_speed', Float64, queue_size=2)
+    left_wheel_pub = rospy.Publisher('/uavcar/jointL_velocity_controller/command', Float64, queue_size=2)
+    right_wheel_pub = rospy.Publisher('/uavcar/jointR_velocity_controller/command', Float64, queue_size=2)
 
     rospy.spin()  # simply keeps python from exiting until this node is stopped
