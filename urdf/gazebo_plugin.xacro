@@ -65,7 +65,7 @@
 
 	<gazebo reference="ultrasonic_link">	    
         <sensor type="ray" name="UAV_ultrasonic">
-            <pose>0 0 0 0 0 0</pose>
+            <pose>0 0 0 0 1.57 1.57</pose>
             <visualize>true</visualize>
             <update_rate>40</update_rate>
             <ray>

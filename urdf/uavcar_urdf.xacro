@@ -247,7 +247,7 @@
     <visual>
       <origin
         xyz="0 0 0"
-        rpy="0 0 0" />
+        rpy="0 0 -1.57" />
       <geometry>
         <mesh
           filename="package://uavionics_workshop2/meshes/ultrasonic_link.STL" />
@@ -273,7 +273,7 @@
     type="fixed">
     <origin
       xyz="-0.0072137 0.051648 0.010322"
-      rpy="0 0.00074274 0" />
+      rpy="0 0.00074274 1.57" />
     <parent
       link="base_link" />
     <child
@@ -306,7 +306,7 @@
     <visual>
       <origin
         xyz="0 0 0"
-        rpy="0 0 0" />
+        rpy="0 0 -1.57" />
       <geometry>
         <mesh
           filename="package://uavionics_workshop2/meshes/camera_link.STL" />
@@ -332,7 +332,7 @@
     type="fixed">
     <origin
       xyz="0.0015589 0.045046 0.031152"
-      rpy="-3.1416 0 3.1416" />
+      rpy="0 0 1.57" />
     <parent
       link="base_link" />
     <child
@@ -352,7 +352,7 @@
     </actuator>
   </transmission>
 
-  <transmission name="right_wheel_link">
+  <transmission name="right_wheel_trans">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="right_wheel_joint">
       <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
