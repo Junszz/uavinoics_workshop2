@@ -26,13 +26,17 @@ git clone https://github.com/Junszz/uavinoics_workshop2
 catkin build
 ```
 
-3. Add this workspace to your linux environment by sourcing the setup file to .bashrc. You can do this by running the following command:
+3. You may add the workspace to your linux environment by sourcing the setup file to .bashrc so that you don't have to source the setup.bash file everytime you open a new terminal. You can do this by running the following command:
 ```
 echo "source ~/(YOUR WORK SPACE)/devel/setup.bash" >> ~/.bashrc
 ```
 As an example:
 ```
 echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
+```
+**Otherwise**, do the following whenever you open a new terminal, replace <> with your workspace name
+```
+source ~/<your_workspace_name>/src/devel/setup.bash
 ```
 
 4. Launch the package.
@@ -66,6 +70,12 @@ Then open a new terminal and try again.
 cd ~/catkin_ws/src/uavionics_workshop2/scripts/
 chmod +x keyboard_teleop.py
 chmod +x control.py
+
+```
+**or**, do it with one line
+```
+cd ~/catkin_ws/src/uavionics_workshop2/scripts/
+chmod +x *
 
 ```
 
