@@ -6,7 +6,7 @@
 	<arg name="P" default="0.0" />
 	<arg name="Y" default="0.0" />
 
-  <param name="robot_description" command="$(find xacro)/xacro '$(find uavcar)/urdf/uavcar_urdf.xacro'"/>
+  <param name="robot_description" command="$(find xacro)/xacro '$(find uavionics_workshop2)/urdf/uavcar_urdf.xacro'"/>
 
   <include
     file="$(find gazebo_ros)/launch/empty_world.launch" />

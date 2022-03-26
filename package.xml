@@ -1,5 +1,5 @@
 <package format="2">
-  <name>uavcar</name>
+  <name>uavionics_workshop2</name>
   <version>1.0.0</version>
   <description>
     <p>URDF Description package for car_model_v2</p>

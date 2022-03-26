@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8.3)
 
-project(uavcar)
+project(uavionics_workshop2)
 
 # Depend on system install of Gazebo
 find_package(gazebo REQUIRED)
