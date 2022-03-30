@@ -7,8 +7,8 @@ from gazebo_msgs.msg import ModelStates
 from tf.transformations import euler_from_quaternion
 
 # to set an default initial state
-L = 0.4
-R = 0.04
+L = 0.131
+R = 0.064
 current_velocity = 0.0
 current_orientation = 0.0
 reference_velocity = 0.0
