@@ -62,7 +62,7 @@ def gazebomodelstate_callback(data):
         else:
             error = error - 2*math.pi
 
-    print(error)
+    # print(error)
     #get the desire angular_velocity to apply to our robot from controller
     angular_velocity = p_controller(error)
 

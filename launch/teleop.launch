@@ -7,9 +7,10 @@
 	<arg name="Y" default="0.0" />
 
   <param name="robot_description" command="$(find xacro)/xacro '$(find uavionics_workshop2)/urdf/uavcar_urdf.xacro'"/>
-
-  <include
-    file="$(find gazebo_ros)/launch/empty_world.launch" />
+  <rosparam file="$(find uavionics_workshop2)/config/config.yaml" command="load"/>
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+  	<!-- <arg name="world_name" value="$(find uavionics_workshop2)/world/maze1.world"/> -->
+  </include>
   <node
     name="tf_footprint_base"
     pkg="tf"
@@ -22,17 +23,17 @@
     args="-urdf -model uavcar -param robot_description"
     output="screen" />
     
-  <node name="joint_state_publisher" type="joint_state_publisher" pkg="joint_state_publisher" />
+  <node name="joint_state_publisher" type="joint_state_publisher" pkg="joint_state_publisher"/>
 
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen"/>
 
   <node name="car_teleop" pkg="uavionics_workshop2" type="teleop_twist_keyboard.py" output="screen"/>
 
-  <!-- <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
-    output="screen" ns="/uavcar" args="jointBL_velocity_controller jointBR_velocity_controller jointFL_velocity_controller jointFR_velocity_controller joint_state_controller"/> -->
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+    output="screen" ns="/uavcar" args="jointL_velocity_controller jointR_velocity_controller joint_state_controller"/> 
 
   <!-- convert joint states to TF transforms for rviz, etc -->
-  <!-- <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+ <!-- <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
     respawn="false" output="screen">
     <remap from="/joint_states" to="/uavcar/joint_states" />
   </node> -->
