@@ -82,3 +82,17 @@ chmod +x *
 7. You can control the robot car by either using tele-operation (running the keyboard_teleop.py script) or complete the autonomous driving script.
 
 ![Image](images/teleop.png)
+
+8. Control the robot car by running the dummy autonomous driving script.
+
+```
+rosrun uavionics_workshop2 auto.py
+```
+Next, the terminal should come out "Please start the service". To run the service, start the service by typing in a new terminal.
+**The service name set in this workshop is LetsGo **
+
+```
+rosservice call LetsGo "data:true"
+```
+
+9. Try to ammend the code by yourselves to tune the velocity and orientation
