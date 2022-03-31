@@ -31,15 +31,16 @@ def startAutonomous(data):
     max_range = data.max_range # 1
     min_range = data.min_range # 0.2
     threshold = 0.5 # TO BE CHANGE
-    if range < 0.1:
-        reference_velocity = -0.1 # Bump on the wall
-    elif range < 0.7: 
-        # STOP AND TURN LEF0.1
-        reference_orientation += 0.1
-        reference_velocity = 0.1
+    if range < 0.5:
+        reference_velocity = 0.1 # Bump on the wall
+        reference_orientation += math.pi/180
+    # elif range < 0.3: 
+    #     # STOP AND TURN LEF0.1
+    #     reference_orientation += 0.018
+    #     reference_velocity = 0.1
     else:
         # GO STRAIGHT
-        reference_velocity = 0.3
+        reference_velocity = 0.2
     
 
 
