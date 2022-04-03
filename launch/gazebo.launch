@@ -4,7 +4,7 @@
 	<arg name="z" default="0.3" />
 	<arg name="R" default="0.0" />
 	<arg name="P" default="0.0" />
-	<arg name="Y" default="0.0" />
+	<arg name="Y" default="3.14" />
 
   <param name="robot_description" command="$(find xacro)/xacro '$(find uavionics_workshop2)/urdf/uavcar_urdf.xacro'"/>
   <rosparam file="$(find uavionics_workshop2)/config/config.yaml" command="load"/>
