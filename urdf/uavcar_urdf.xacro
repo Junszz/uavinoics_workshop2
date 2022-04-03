@@ -139,10 +139,10 @@
     <visual>
       <origin
         xyz="0 0 0"
-        rpy="0 0 0" />
+        rpy="0 -1.57 0" />
       <geometry>
         <mesh
-          filename="package://uavionics_workshop2/meshes/left_wheel_link_collision.STL" />
+          filename="package://uavionics_workshop2/meshes/left_wheel_link_visual.STL" />
       </geometry>
       <material
         name="">
@@ -193,10 +193,10 @@
     <visual>
       <origin
         xyz="0 0 0"
-        rpy="0 0 0" />
+        rpy="0 1.57 0" />
       <geometry>
         <mesh
-          filename="package://uavionics_workshop2/meshes/right_wheel_link_collision.STL" />
+          filename="package://uavionics_workshop2/meshes/right_wheel_link_visual.STL" />
       </geometry>
       <material
         name="">
@@ -246,8 +246,8 @@
     </inertial>
     <visual>
       <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
+        xyz="0.011 0 0"
+        rpy="0 0 -1.57" />
       <geometry>
         <mesh
           filename="package://uavionics_workshop2/meshes/ultrasonic_link.STL" />
@@ -273,7 +273,7 @@
     type="fixed">
     <origin
       xyz="0 -0.05827 -0.0045938"
-      rpy="0 0 -3.1416" />
+      rpy="0 0 -1.57" />
     <parent
       link="base_link" />
     <child
@@ -300,8 +300,8 @@
     </inertial>
     <visual>
       <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
+        xyz="0.016 0 0"
+        rpy="0 0 -1.57" />
       <geometry>
         <mesh
           filename="package://uavionics_workshop2/meshes/camera_link.STL" />
@@ -327,7 +327,7 @@
     type="fixed">
     <origin
       xyz="0 -0.04927 0.011896"
-      rpy="0 0 3.14" />
+      rpy="0 0 -1.57" />
     <parent
       link="base_link" />
     <child
