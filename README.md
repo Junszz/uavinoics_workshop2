@@ -1,4 +1,6 @@
 # uavionics_workshop2 (Control robot in ROS with implementation of roslaunch & rosservice)
+### NTU Uavionics Club
+### Nanyang Technological University Singapore
 
 This is an ros-package created for NTU Uavionics ROS Workshop 2. This repository assumes readers have a complete ROS1 environment (i.e Ubuntu or VMware) or run this package at a ROS simulation platform such as TheConstructSim.
 
