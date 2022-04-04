@@ -12,7 +12,7 @@ R = 0.064
 current_velocity = 0.0
 current_orientation = 0.0
 reference_velocity = 0.0
-reference_orientation = 0.0
+reference_orientation = 3.14
 ROBOTNAME = "uavcar"
 
 def cmd_vel_callback(data):
@@ -71,7 +71,7 @@ def gazebomodelstate_callback(data):
 
     # To publish into L & R motor
     left_wheel_pub.publish(left_wheel_speed)
-    right_wheel_pub.publish(-1*right_wheel_speed)
+    right_wheel_pub.publish(right_wheel_speed)
 
 
 def p_controller(error):

@@ -17,7 +17,7 @@ ROBOTNAME = "uavcar"
 reference_orientation = 0
 
 def startAutonomous(data):
-    global reference_orientation
+    global current_orientation
     if not start:
         # Please start the robot
         rospy.loginfo("Please start the service")
@@ -29,12 +29,15 @@ def startAutonomous(data):
     min_range = data.min_range # 0.2
     threshold = 0.5 # TO BE CHANGE
     if range < 0.5:
-        reference_orientation = reference_orientation +math.pi/180
+        print("Turn")
+        current_orientation = current_orientation + math.pi/2
         speed_pub.publish(0.1)
-        rotate_pub.publish(reference_orientation)
+        rotate_pub.publish(current_orientation)
+        rospy.sleep(10)
     else:
         # GO STRAIGHT
-        speed_pub.publish(0.2)
+        print("Straight")
+        speed_pub.publish(0.4)
     
 
 

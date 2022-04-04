@@ -32,8 +32,8 @@ CTRL-C to quit
 
 moveBindings = {
         'i':(0.2,0),
-        'o':(0,-0.08726646259),
-        'u':(0,0.08726646259),
+        'o':(0,0.08726646259),
+        'u':(0,-0.08726646259),
         'k':(0,0),
     }
 
@@ -149,7 +149,6 @@ if __name__=="__main__":
                 th += moveBindings[key][1]
                 if key == 'k':
                     x = 0
-                    th = 0
             else:
                 # Skip updating cmd_vel if key timeout and robot already
                 # stopped.

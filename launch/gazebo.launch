@@ -4,12 +4,12 @@
 	<arg name="z" default="0.3" />
 	<arg name="R" default="0.0" />
 	<arg name="P" default="0.0" />
-	<arg name="Y" default="3.14" />
+	<arg name="Y" default="0" />
 
   <param name="robot_description" command="$(find xacro)/xacro '$(find uavionics_workshop2)/urdf/uavcar_urdf.xacro'"/>
   <rosparam file="$(find uavionics_workshop2)/config/config.yaml" command="load"/>
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-  	<arg name="world_name" value="$(find uavionics_workshop2)/world/maze1.world"/>
+  	<!-- <arg name="world_name" value="$(find uavionics_workshop2)/world/maze1.world"/> -->
   </include>
 
   <node
