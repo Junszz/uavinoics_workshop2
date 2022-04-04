@@ -132,7 +132,7 @@ if __name__=="__main__":
     pub_thread = PublishThread(repeat)
 
     x = 0
-    th = 3.14
+    th = 0
     status = 0
 
     try:

@@ -17,31 +17,6 @@ ROBOTNAME = "uavcar"
 reference_orientation = 0
 current_distance = 1
 
-# def ultrasonic_state_callback
-
-# def startAutonomous(data):
-#     global current_orientation
-#     if not start:
-#         # Please start the robot
-#         rospy.loginfo("Please start the service")
-#         rospy.sleep(5)
-#         return 
-
-#     range = data.range 
-#     max_range = data.max_range # 1
-#     min_range = data.min_range # 0.2
-#     threshold = 0.5 # TO BE CHANGE
-#     if range < 0.5:
-#         print("Turn")
-#         current_orientation = current_orientation + math.pi/2
-#         speed_pub.publish(0.1)
-#         rotate_pub.publish(current_orientation)
-#         rospy.sleep(10)
-#     else:
-#         # GO STRAIGHT
-#         print("Straight")
-#         speed_pub.publish(0.4)
-    
 def ultrasonic_state_callback(data):
     global current_distance 
     current_distance = data.range 
@@ -55,32 +30,7 @@ def start_server(req):
     else:
         start = False
         return SetBoolResponse(False, "The robot has halted")
-
-def current_state_callback(data):
-    #callback function to get the current states (velocity, position and etc) of our robot
-    global current_velocity, current_orientation, linear_velocity
-    robots = data.name
-    robot_idx=0
-
-    #in gazebo model state, different "index" represent different robot, thus, we need to find the correspoinding robot index to extract the correct values.
-    for idx, robot in enumerate(list(robots)):
-        if robot == ROBOTNAME:
-            robot_idx = idx
-            break
-    
-    #Then, calculate the linear velocity with Pythagoras' theorem
-    linear_velocity = math.sqrt(pow(data.twist[robot_idx].linear.x, 2)+pow(data.twist[robot_idx].linear.y, 2))
-    #the orientation is in Quaternion Form, we need to convert it to Euler Form (The one we familiar with) before we proceed
-    x_o = data.pose[robot_idx].orientation.x
-    y_o = data.pose[robot_idx].orientation.y
-    z_o = data.pose[robot_idx].orientation.z
-    w = data.pose[robot_idx].orientation.w
-
-    #yaw, rotation along z-axis is the one that we interested, another two should be close to zero all the time
-    (roll, pitch, yaw) = euler_from_quaternion([x_o,y_o,z_o,w]) 
-    current_orientation = yaw
-
-
+        
 if __name__ == '__main__':
     # name of this node(controller_system)
     rospy.init_node('controller_system', anonymous=True)
@@ -89,7 +39,6 @@ if __name__ == '__main__':
 
     # subscribe to two nodes (  gazebo_model_state, ultrasonic_feedback )
     rospy.Subscriber("/ultrasonic_feedback", Range, ultrasonic_state_callback)
-    rospy.Subscriber("/gazebo/model_states", ModelStates,current_state_callback)
 
     # publish to two nodes ( cmd_vel, cmd_orientation)
     speed_pub = rospy.Publisher('/cmd_vel', Float64, queue_size=2)
@@ -99,9 +48,8 @@ if __name__ == '__main__':
         print("HI")
         if current_distance < 0.5:
             print("Turn")
-            current_orientation = current_orientation + math.pi/2
             speed_pub.publish(0.1)
-            rotate_pub.publish(current_orientation)
+            rotate_pub.publish(math.pi/2)
             rospy.sleep(10)
         else:
             # GO STRAIGHT
