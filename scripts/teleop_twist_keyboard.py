@@ -31,10 +31,10 @@ CTRL-C to quit
 """
 
 moveBindings = {
-        'i':(0.2,0),
-        'o':(0,0.08726646259),
-        'u':(0,-0.08726646259),
-        'k':(0,0),
+        'i':(0.2, 0),
+        'o':(0, -0.08726646259),
+        'u':(0, 0.08726646259),
+        'k':(0, 0),
     }
 
 
@@ -132,7 +132,7 @@ if __name__=="__main__":
     pub_thread = PublishThread(repeat)
 
     x = 0
-    th = 0
+    th = 3.14
     status = 0
 
     try:
@@ -146,7 +146,7 @@ if __name__=="__main__":
             key = getKey(key_timeout)
             if key in moveBindings.keys():
                 x += moveBindings[key][0]
-                th += moveBindings[key][1]
+                th = moveBindings[key][1]
                 if key == 'k':
                     x = 0
             else:
@@ -155,7 +155,7 @@ if __name__=="__main__":
                 if key == '' and x == 0 and th == 0:
                     continue
                 x = 0
-                th = 0
+                th = 3.14
                 if (key == '\x03'):
                     break
             pub_thread.orien_publisher.publish(th)

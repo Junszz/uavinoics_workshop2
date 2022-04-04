@@ -15,31 +15,37 @@ current_velocity = 0.0
 current_orientation = 0.0
 ROBOTNAME = "uavcar"
 reference_orientation = 0
+current_distance = 1
 
-def startAutonomous(data):
-    global current_orientation
-    if not start:
-        # Please start the robot
-        rospy.loginfo("Please start the service")
-        rospy.sleep(5)
-        return 
+# def ultrasonic_state_callback
 
-    range = data.range 
-    max_range = data.max_range # 1
-    min_range = data.min_range # 0.2
-    threshold = 0.5 # TO BE CHANGE
-    if range < 0.5:
-        print("Turn")
-        current_orientation = current_orientation + math.pi/2
-        speed_pub.publish(0.1)
-        rotate_pub.publish(current_orientation)
-        rospy.sleep(10)
-    else:
-        # GO STRAIGHT
-        print("Straight")
-        speed_pub.publish(0.4)
+# def startAutonomous(data):
+#     global current_orientation
+#     if not start:
+#         # Please start the robot
+#         rospy.loginfo("Please start the service")
+#         rospy.sleep(5)
+#         return 
+
+#     range = data.range 
+#     max_range = data.max_range # 1
+#     min_range = data.min_range # 0.2
+#     threshold = 0.5 # TO BE CHANGE
+#     if range < 0.5:
+#         print("Turn")
+#         current_orientation = current_orientation + math.pi/2
+#         speed_pub.publish(0.1)
+#         rotate_pub.publish(current_orientation)
+#         rospy.sleep(10)
+#     else:
+#         # GO STRAIGHT
+#         print("Straight")
+#         speed_pub.publish(0.4)
     
-
+def ultrasonic_state_callback(data):
+    global current_distance 
+    current_distance = data.range 
+     
 
 def start_server(req):
     global start
@@ -82,11 +88,23 @@ if __name__ == '__main__':
     s = rospy.Service('LetsGo', SetBool, start_server)
 
     # subscribe to two nodes (  gazebo_model_state, ultrasonic_feedback )
-    rospy.Subscriber("/ultrasonic_feedback", Range, startAutonomous)
+    rospy.Subscriber("/ultrasonic_feedback", Range, ultrasonic_state_callback)
     rospy.Subscriber("/gazebo/model_states", ModelStates,current_state_callback)
 
     # publish to two nodes ( cmd_vel, cmd_orientation)
     speed_pub = rospy.Publisher('/cmd_vel', Float64, queue_size=2)
     rotate_pub = rospy.Publisher('/cmd_orientation', Float64, queue_size=2)
-
-    rospy.spin()  # simply keeps python from exiting until this node is stopped
+    
+    while not rospy.is_shutdown():
+        print("HI")
+        if current_distance < 0.5:
+            print("Turn")
+            current_orientation = current_orientation + math.pi/2
+            speed_pub.publish(0.1)
+            rotate_pub.publish(current_orientation)
+            rospy.sleep(10)
+        else:
+            # GO STRAIGHT
+            print("Straight")
+            speed_pub.publish(0.4)
+        

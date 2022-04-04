@@ -25,7 +25,8 @@ def cmd_orientation_callback(data):
     #callback function to get the reference orientation from another rosnode
     global reference_orientation
     #bind orientation to [-pi,pi]
-    reference_orientation = 2*math.atan(math.tan(0.5*data.data))
+    print(reference_orientation)
+    reference_orientation = reference_orientation+ 2*math.atan(math.tan(0.5*data.data))
 
 
 def gazebomodelstate_callback(data):
