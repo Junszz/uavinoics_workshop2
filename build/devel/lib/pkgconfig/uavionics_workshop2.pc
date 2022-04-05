@@ -1,8 +1,0 @@
-prefix=/home/venti-lap/catkin_ws/src/uavionics_workshop2/build/devel
-
-Name: uavionics_workshop2
-Description: Description of uavionics_workshop2
-Version: 1.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: roscpp geometry_msgs sensor_msgs nav_msgs std_srvs
