@@ -35,7 +35,8 @@ if __name__ == '__main__':
     # name of this node(controller_system)
     rospy.init_node('controller_system', anonymous=True)
 
-    s = rospy.Service('LetsGo', SetBool, start_server)
+    s = rospy.Service('/LetsGo', SetBool, start_server)
+    print("Ready to start auto program......")
 
     # subscribe to two nodes (  gazebo_model_state, ultrasonic_feedback )
     rospy.Subscriber("/ultrasonic_feedback", Range, ultrasonic_state_callback)
@@ -45,14 +46,14 @@ if __name__ == '__main__':
     rotate_pub = rospy.Publisher('/cmd_orientation', Float64, queue_size=2)
     
     while not rospy.is_shutdown():
-        print("HI")
-        if current_distance < 0.5:
-            print("Turn")
-            speed_pub.publish(0.1)
-            rotate_pub.publish(math.pi/2)
-            rospy.sleep(10)
-        else:
-            # GO STRAIGHT
-            print("Straight")
-            speed_pub.publish(0.4)
+        if start:
+            if current_distance < 0.5:
+                print("Turn")
+                speed_pub.publish(0.1)
+                rotate_pub.publish(math.pi/2)
+                rospy.sleep(10)
+            else:
+                # GO STRAIGHT
+                print("Straight")
+                speed_pub.publish(0.4)
         

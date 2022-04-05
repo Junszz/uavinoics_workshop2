@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/venti-lap/catkin_ws/src/uavionics_workshop2/build/devel/setup.sh
