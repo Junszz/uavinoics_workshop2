@@ -1,32 +1,29 @@
-<launch>
+  <launch>
 	<arg name="x" default="0.3" />
 	<arg name="y" default="0.2" />
 	<arg name="z" default="0.3" />
 	<arg name="R" default="0.0" />
 	<arg name="P" default="0.0" />
-	<arg name="Y" default="0" />
+	<arg name="Y" default="3.14" />
 
   <param name="robot_description" command="$(find xacro)/xacro '$(find uavionics_workshop2)/urdf/uavcar_urdf.xacro'"/>
-  <rosparam file="$(find uavionics_workshop2)/config/config.yaml" command="load"/>
+  
+  <!-- load empty world -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-  	<!-- <arg name="world_name" value="$(find uavionics_workshop2)/world/maze1.world"/> -->
   </include>
-
-  <node
+    <node
     name="spawn_model"
     pkg="gazebo_ros"
     type="spawn_model"
     args="-urdf -model uavcar -param robot_description -x $(arg x) -y $(arg y) -z $(arg z) -R $(arg R) -P $(arg P) -Y $(arg Y)"
     output="screen" />
-    
-  <node name="joint_state_publisher" type="joint_state_publisher" pkg="joint_state_publisher" />
 
+  <!-- load controller -->
+  <rosparam file="$(find uavionics_workshop2)/config/config.yaml" command="load"/>  
+  <node name="joint_state_publisher" type="joint_state_publisher" pkg="joint_state_publisher"/>
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen"/>
   <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
-    output="screen" ns="/uavcar" args="jointL_velocity_controller jointR_velocity_controller joint_state_controller"/>
+    output="screen" ns="/uavcar" args="jointL_velocity_controller jointR_velocity_controller joint_state_controller"/> 
+  <node name="control" pkg="uavionics_workshop2" type="control.py" output="screen"/>
 
-  <!-- convert joint states to TF transforms for rviz, etc -->
-  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
-    respawn="false" output="screen">
-    <remap from="/joint_states" to="/uavcar/joint_states" />
-  </node>
 </launch>

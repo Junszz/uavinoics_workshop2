@@ -47,13 +47,6 @@ if __name__ == '__main__':
     
     while not rospy.is_shutdown():
         if start:
-            if current_distance < 0.5:
-                print("Turn")
-                speed_pub.publish(0.1)
-                rotate_pub.publish(math.pi/2)
-                rospy.sleep(10)
-            else:
-                # GO STRAIGHT
-                print("Straight")
-                speed_pub.publish(0.4)
+            # TO DO
+            pass
         
