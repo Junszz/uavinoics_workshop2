@@ -18,6 +18,7 @@ ROBOTNAME = "uavcar"
 def cmd_vel_callback(data):
     #callback function to get the reference cmd_vel from another rosnode
     global reference_velocity
+    # print(f"reference_vel: {reference_velocity} \r")
     reference_velocity = data.data
 
 
@@ -25,7 +26,7 @@ def cmd_orientation_callback(data):
     #callback function to get the reference orientation from another rosnode
     global reference_orientation
     #bind orientation to [-pi,pi]
-    print(reference_orientation)
+    # print(f"reference_orientation: {reference_orientation} \r")
     reference_orientation = reference_orientation+ 2*math.atan(math.tan(0.5*data.data))
 
 
@@ -77,7 +78,7 @@ def gazebomodelstate_callback(data):
 
 def p_controller(error):
     #a feedback controller which trying to converge the "error" to zero
-    gain = 0.6
+    gain = 1
     return gain*error
 
 
