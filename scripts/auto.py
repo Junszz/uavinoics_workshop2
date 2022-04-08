@@ -17,10 +17,11 @@ ROBOTNAME = "uavcar"
 reference_orientation = 0
 current_distance = 1
 
+
 def ultrasonic_state_callback(data):
-    global current_distance 
-    current_distance = data.range 
-     
+    global current_distance
+    current_distance = data.range
+
 
 def start_server(req):
     global start
@@ -30,7 +31,8 @@ def start_server(req):
     else:
         start = False
         return SetBoolResponse(False, "The robot has halted")
-        
+
+
 if __name__ == '__main__':
     # name of this node(controller_system)
     rospy.init_node('controller_system', anonymous=True)
@@ -44,9 +46,8 @@ if __name__ == '__main__':
     # publish to two nodes ( cmd_vel, cmd_orientation)
     speed_pub = rospy.Publisher('/cmd_vel', Float64, queue_size=2)
     rotate_pub = rospy.Publisher('/cmd_orientation', Float64, queue_size=2)
-    
+
     while not rospy.is_shutdown():
         if start:
             # TO DO
             pass
-        

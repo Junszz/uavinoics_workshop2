@@ -8,7 +8,10 @@ import rospy
 from geometry_msgs.msg import Twist
 from std_msgs.msg import Empty, Float64
 
-import sys, select, termios, tty
+import sys
+import select
+import termios
+import tty
 
 msg = """
 Reading from the keyboard  and Publishing to Twist!
@@ -35,11 +38,13 @@ CTRL-C or c to quit
 speed_limit = 1
 turn_limit = 0.5
 
+
 class PublishThread(threading.Thread):
     def __init__(self, rate):
         super(PublishThread, self).__init__()
-        self.cmd_publisher = rospy.Publisher('/cmd_vel', Float64, queue_size = 1)
-        self.orien_publisher = rospy.Publisher('/cmd_orientation', Float64, queue_size = 1)
+        self.cmd_publisher = rospy.Publisher('/cmd_vel', Float64, queue_size=1)
+        self.orien_publisher = rospy.Publisher(
+            '/cmd_orientation', Float64, queue_size=1)
         self.speed = 0.0
         self.turn = 0.0
         self.speed_step_size = 0.0
@@ -60,14 +65,16 @@ class PublishThread(threading.Thread):
         i = 0
         while not rospy.is_shutdown() and self.cmd_publisher.get_num_connections() == 0:
             if i == 4:
-                print("Waiting for subscriber to connect to {}".format(self.cmd_publisher.name))
+                print("Waiting for subscriber to connect to {}".format(
+                    self.cmd_publisher.name))
             rospy.sleep(0.5)
             i += 1
             i = i % 5
         if rospy.is_shutdown():
-            raise Exception("Got shutdown request before subscribers connected")
+            raise Exception(
+                "Got shutdown request before subscribers connected")
 
-    def update(self, linear_step, angular_step, reset_state = False):
+    def update(self, linear_step, angular_step, reset_state=False):
         self.condition.acquire()
         if reset_state:
             self.speed = 0.0
@@ -77,8 +84,8 @@ class PublishThread(threading.Thread):
             self.angular_step_size = angular_step
             self.speed += self.speed_step_size
             self.turn = self.angular_step_size
-            self.speed = max(min(speed_limit,self.speed),-1*speed_limit)
-            self.turn = max(min(turn_limit,self.turn),-1*turn_limit)
+            self.speed = max(min(speed_limit, self.speed), -1*speed_limit)
+            self.turn = max(min(turn_limit, self.turn), -1*turn_limit)
         # Notify publish thread that we have a new message.
         print(self.vels()+"\r")
 
@@ -99,10 +106,10 @@ class PublishThread(threading.Thread):
             self.orien_publisher.publish(self.turn)
             self.cmd_publisher.publish(self.speed)
             self.condition.release()
-    
+
     def vels(self):
-        return "currently:\tspeed %s\tturn %s " % (self.speed,self.turn)
-            
+        return "currently:\tspeed %s\tturn %s " % (self.speed, self.turn)
+
 
 def getKey(key_timeout):
     tty.setraw(sys.stdin.fileno())
@@ -114,7 +121,8 @@ def getKey(key_timeout):
     termios.tcsetattr(sys.stdin, termios.TCSADRAIN, settings)
     return key
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     settings = termios.tcgetattr(sys.stdin)
 
     rospy.init_node('teleop_twist_keyboard')
@@ -123,7 +131,7 @@ if __name__=="__main__":
     turn = rospy.get_param("~turn", 0.0)
     linear_step = rospy.get_param("~speed", 0.1)
     angular_step = rospy.get_param("~turn", 0.1)
-    
+
     repeat = rospy.get_param("~repeat_rate", 0.0)
     key_timeout = rospy.get_param("~key_timeout", 0.2)
     if key_timeout == 0.0:
@@ -133,8 +141,8 @@ if __name__=="__main__":
 
     try:
         pub_thread.wait_for_subscribers()
- 
-        #initial vel and turn
+
+        # initial vel and turn
         pub_thread.update(speed, turn)
 
         print(msg)
